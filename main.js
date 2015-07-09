@@ -2,21 +2,7 @@ var audioCtx, buf;
 
 var initializeAudioContext = function() {
     audioCtx = new window.AudioContext();
-    loadExample();
 };
-
-function loadExample() {
-    var req = new XMLHttpRequest();
-    req.open("GET","italiano.mp3",true);
-    req.responseType = "arraybuffer";
-    req.onload = function() {
-        audioCtx.decodeAudioData(req.response, function(buffer) {
-            buf = buffer;
-            playExample();
-        });
-    };
-    req.send();
-}
 
 function playExample() {
     var src = audioCtx.createBufferSource();
@@ -28,4 +14,33 @@ function playExample() {
     src.start();
 }
 
+var dropTarget = document.getElementById('drop-target');
+
 window.addEventListener('load', initializeAudioContext, false);
+
+dropTarget.addEventListener('dragenter', function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    dropTarget.classList.add('hover');
+}, false);
+
+dropTarget.addEventListener('dragleave', function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    dropTarget.classList.remove('hover');
+}, false);
+
+dropTarget.addEventListener('drop', function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    var dataTransger = e.dataTransfer,
+        files = dataTransger.files;
+
+    audioCtx.decodeAudioData(files, function(buffer) {
+        buf = buffer;
+        playExample();
+    });
+}, false);
