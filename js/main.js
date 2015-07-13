@@ -18,8 +18,10 @@ requirejs({
     }
 });
 
-define(['UIDispatcher'], function(UIDispatcher) {
+define(['UIDispatcher', 'AudioController'], function(UIDispatcher, AudioController) {
     console.log(UIDispatcher);
+    console.log(AudioController);
+    AudioController.test();
 });
 
 //var audioCtx, buf;
