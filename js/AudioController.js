@@ -28,23 +28,18 @@ define(['backbone', 'UIDispatcher'], function(Backbone, UIDispatcher) {
     AudioController.startOffset = 0;
 
     AudioController.play = function() {
-        console.log(AudioController.startTime);
-        console.log(AudioController.startOffset);
-
         AudioController.startTime = AudioController.context.currentTime;
         AudioController.nodes.updateSourceNode();
         AudioController.nodes.source.start(0, AudioController.startOffset % AudioController.nodes.source.buffer.duration);
-        //alert('play');
+        //console.log(AudioController.startTime);
+        //console.log(AudioController.startOffset);
     };
 
     AudioController.pause = function() {
-        console.log(AudioController.startTime);
-        console.log(AudioController.startOffset);
-
-
         AudioController.nodes.source.stop(0);
-        AudioController.startOffset += AudioController.context.currentTime - AudioController.startTime;
-        //alert('stop');
+        AudioController.startOffset += (AudioController.context.currentTime - AudioController.startTime);
+        //console.log(AudioController.startTime);
+        //console.log(AudioController.startOffset);
     };
 
     AudioController.listenTo(UIDispatcher, 'play', AudioController.play);
