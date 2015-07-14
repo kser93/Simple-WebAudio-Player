@@ -61,8 +61,8 @@ define(
             AudioController.context.decodeAudioData(req.response, function(buffer) {
                 //src.connect(AudioController.nodes.destination);
                 AudioController.nodes.source.buffer = buffer;
-                EventAggregator.trigger('ready');
                 AudioController.play();
+                EventAggregator.trigger('ready');
             });
         };
         req.send();
