@@ -14,9 +14,11 @@ define(
         },
 
         enableUI: function() {
-            var button = UIController.controls.playPauseButton;
-            button.removeClass('controls__playpause_inactive');
-            button.addClass('controls__playpause_pause');
+            UIController.controls.playPauseButton.removeClass('controls__playpause_inactive');
+            UIController.controls.playPauseButton.addClass('controls__playpause_pause');
+
+            UIController.controls.equalizerButton.removeClass('controls__equalizer_inactive');
+            UIController.controls.equalizerButton.addClass('controls__equalizer');
         },
 
         clickPlayPauseButton: function() {
