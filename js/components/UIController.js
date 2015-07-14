@@ -13,6 +13,10 @@ define(
         equalizerButton: $('[class^=controls][class*=equalizer]')
     };
 
+    UIController.listenTo(EventAggregator, 'ready', function() {
+        UIController.controls.playPauseButton.removeClass('controls__playpause_inactive');
+        UIController.controls.playPauseButton.addClass('controls__playpause_pause');
+    });
     UIController.controls.playPauseButton.click(function() {
         var button = $(this);
         if (button.is('[class$=play]')) {

@@ -42,22 +42,11 @@ $activeButtonColor: black;
         width: 0;
         height: 0;
         border-top: 20px solid transparent;
-        border-left: 34px solid red;
+        border-left: 34px solid $activeButtonColor;
         border-bottom: 20px solid transparent;
         margin-left: 37px;
         margin-top: 30px;
         content: '';
-      }
-
-      &_active {
-        &::after {
-          border-left-color: $activeButtonColor;
-        }
-      }
-      &_inactive {
-        &::after {
-          border-left-color: $inactiveButtonColor;
-        }
       }
     }
 
@@ -69,7 +58,7 @@ $activeButtonColor: black;
         position: absolute;
         width: 10px;
         height: 40px;
-        background: red;
+        background: $activeButtonColor;
         margin-left: 37px;
         margin-top: 30px;
         content: '';
@@ -79,21 +68,31 @@ $activeButtonColor: black;
         position: absolute;
         width: 10px;
         height: 40px;
-        background: red;
+        background: $activeButtonColor;
         margin-left: 52px;
         margin-top: 30px;
         content: '';
       }
+    }
 
-      &_active {
-        &::before, &::after {
-          background: $activeButtonColor;
-        }
+    &_inactive {
+      @include circleButton();
+
+      &::after {
+        display: block;
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-top: 20px solid transparent;
+        border-left: 34px solid $inactiveButtonColor;
+        border-bottom: 20px solid transparent;
+        margin-left: 37px;
+        margin-top: 30px;
+        content: '';
       }
-      &_inactive {
-        &::before, &::after {
-          background: $inactiveButtonColor;
-        }
+
+      &:hover {
+        border-color: $unfocusedBorderColor;
       }
     }
   }

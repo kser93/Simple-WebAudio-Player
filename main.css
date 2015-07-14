@@ -14,15 +14,11 @@
     width: 0;
     height: 0;
     border-top: 20px solid transparent;
-    border-left: 34px solid red;
+    border-left: 34px solid black;
     border-bottom: 20px solid transparent;
     margin-left: 37px;
     margin-top: 30px;
     content: ''; }
-  .controls__playpause_play_active::after {
-    border-left-color: black; }
-  .controls__playpause_play_inactive::after {
-    border-left-color: #888; }
 .controls__playpause_pause {
   display: inline-block;
   margin: auto;
@@ -38,7 +34,7 @@
     position: absolute;
     width: 10px;
     height: 40px;
-    background: red;
+    background: black;
     margin-left: 37px;
     margin-top: 30px;
     content: ''; }
@@ -47,14 +43,33 @@
     position: absolute;
     width: 10px;
     height: 40px;
-    background: red;
+    background: black;
     margin-left: 52px;
     margin-top: 30px;
     content: ''; }
-  .controls__playpause_pause_active::before, .controls__playpause_pause_active::after {
-    background: black; }
-  .controls__playpause_pause_inactive::before, .controls__playpause_pause_inactive::after {
-    background: #888; }
+.controls__playpause_inactive {
+  display: inline-block;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  border: 3px solid #888;
+  border-radius: 100px;
+  transition: border-color 0.3s ease; }
+  .controls__playpause_inactive:hover {
+    border-color: #ED9939; }
+  .controls__playpause_inactive::after {
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-left: 34px solid #888;
+    border-bottom: 20px solid transparent;
+    margin-left: 37px;
+    margin-top: 30px;
+    content: ''; }
+  .controls__playpause_inactive:hover {
+    border-color: #888; }
 .controls__equalizer {
   display: inline-block;
   margin: auto;
