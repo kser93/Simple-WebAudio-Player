@@ -18,8 +18,18 @@ requirejs({
     }
 });
 
-define(['UIDispatcher', 'AudioController'], function(UIDispatcher, AudioController) {
-    console.log(UIDispatcher);
+define(
+    [
+        'components/UIController',
+        'components/AudioController',
+        'components/EventAggregator'
+    ],
+    function(
+        UIController,
+        AudioController,
+        EventAggregator
+    ) {
+    console.log(UIController);
     console.log(AudioController);
     AudioController.test();
 });

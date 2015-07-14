@@ -1,4 +1,12 @@
-define(['backbone', 'UIDispatcher'], function(Backbone, UIDispatcher) {
+define(
+    [
+        'backbone',
+        'components/EventAggregator'
+    ],
+    function(
+        Backbone,
+        EventAggregator
+    ) {
     var AudioController = _.extend({}, Backbone.Events);
 
     AudioController.context = new AudioContext();
@@ -42,8 +50,8 @@ define(['backbone', 'UIDispatcher'], function(Backbone, UIDispatcher) {
         //console.log(AudioController.startOffset);
     };
 
-    AudioController.listenTo(UIDispatcher, 'play', AudioController.play);
-    AudioController.listenTo(UIDispatcher, 'pause', AudioController.pause);
+    AudioController.listenTo(EventAggregator, 'play', AudioController.play);
+    AudioController.listenTo(EventAggregator, 'pause', AudioController.pause);
 
     AudioController.test = function() {
         var req = new XMLHttpRequest();
