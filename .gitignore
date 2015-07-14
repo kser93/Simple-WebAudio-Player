@@ -1,1 +1,4 @@
 .idea/
+js/lib/
+*.css.map
+*.mp3
