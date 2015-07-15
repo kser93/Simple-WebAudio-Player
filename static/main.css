@@ -1,3 +1,6 @@
+@font-face {
+  font-family: LCD7;
+  src: url("rP2r0IAC.ttf"); }
 .player {
   width: 960px;
   margin: auto;
@@ -22,13 +25,12 @@
         background: #ED9939; }
     .player__visualization__time {
       display: inline-block;
-      font-family: monospace;
-      font-weight: 100;
       margin-top: 10px; }
       .player__visualization__time__current, .player__visualization__time__duration {
-        font-size: 1.5em; }
+        font-family: LCD7, monospace; }
       .player__visualization__time__delimeter {
-        font-size: 2em; }
+        font-family: monospace;
+        font-size: 3em; }
   .player__controls__playpause_play, .player__controls__playpause_pause, .player__controls__playpause_inactive {
     width: 100px;
     height: 100px;
@@ -99,28 +101,32 @@
     height: 200px;
     border: 3px solid black;
     border-radius: 100%;
-    border-width: 1px;
+    border-width: 0;
     position: absolute;
     margin-top: -150px;
     margin-left: 800px;
     background-color: #C0C0C0; }
     .player__controls__volume__inside {
-      width: 160px;
-      height: 160px;
+      width: 170px;
+      height: 170px;
       border: 3px solid black;
       border-radius: 100%;
-      margin-left: 18px;
-      margin-top: 18px;
-      border-width: 1px;
+      margin-left: 15px;
+      margin-top: 15px;
+      border-width: 0;
+      text-align: center;
       background-color: white; }
-      .player__controls__volume__inside::after {
-        position: absolute;
-        margin-left: 76px;
-        margin-top: 160px;
-        width: 10px;
-        height: 22px;
-        content: '';
-        display: block;
-        background: black; }
+      .player__controls__volume__inside__value {
+        position: relative;
+        top: 35%;
+        font-family: LCD7, monospace;
+        font-size: 2em; }
+    .player__controls__volume::after {
+      display: block;
+      width: 6px;
+      height: 15px;
+      margin-left: 97px;
+      background: black;
+      content: ''; }
 
 /*# sourceMappingURL=main.css.map */

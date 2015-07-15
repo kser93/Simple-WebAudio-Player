@@ -3,6 +3,7 @@ $blockWidth: 80px;
 $playerWidth: $blockWidth * $numberOfBlocks;
 
 $buttonSize: 100px;
+$progressHeight: 15px;
 
 $inactiveButtonColor: #888;
 $activeButtonColor: black;
@@ -22,6 +23,11 @@ $unfulfilledColor: #C0C0C0;
   &:hover {
     border-color: $fulfilledColor;
   }
+}
+
+@font-face {
+  font-family: LCD7;
+  src: url('rP2r0IAC.ttf');
 }
 
 .player {
@@ -57,16 +63,15 @@ $unfulfilledColor: #C0C0C0;
 
     &__time {
       display: inline-block;
-      font-family: monospace;
-      font-weight: 100;
       margin-top: 10px;
 
       &__current, &__duration{
-        font-size: 1.5em;
+        font-family: LCD7, monospace;
       }
 
       &__delimeter {
-        font-size: 2em;
+        font-family: monospace;
+        font-size: 3em;
       }
     }
   }
@@ -155,9 +160,12 @@ $unfulfilledColor: #C0C0C0;
     }
 
     &__volume {
-      @include circleButton(2 * $buttonSize);
+      $outerSize: 2 * $buttonSize;
+      $innerSize: $outerSize - 2 * $progressHeight;
 
-      border-width: 1px;
+      @include circleButton($outerSize);
+
+      border-width: 0;
       position: absolute;
       margin-top: -150px;
       margin-left: 10 * $blockWidth;
@@ -165,25 +173,32 @@ $unfulfilledColor: #C0C0C0;
       background-color: $unfulfilledColor;
 
       &__inside {
-        @include circleButton(2 * $buttonSize - 40px);
+        @include circleButton($innerSize);
 
-        margin-left: 18px;
-        margin-top: 18px;
-        border-width: 1px;
+        margin-left: $progressHeight;
+        margin-top: $progressHeight;
+        border-width: 0;
+        text-align: center;
 
         background-color: white;
 
-        &::after {
-          position: absolute;
-          margin-left: $blockWidth - 4px;
-          margin-top: 2 * $blockWidth;
+        &__value {
+          position: relative;
 
-          width: 10px;
-          height: 22px;
-          content: '';
-          display: block;
-          background: black;
+          top: 35%;
+          font-family: LCD7, monospace;
+          font-size: 2em;
         }
+      }
+
+      &::after {
+        $delimeterWidth: 6px;
+        display: block;
+        width: $delimeterWidth;
+        height: $progressHeight;
+        margin-left: ($outerSize - $delimeterWidth) / 2;
+        background: black;
+        content: '';
       }
     }
   }
