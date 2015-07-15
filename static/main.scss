@@ -1,0 +1,190 @@
+$numberOfBlocks: 12;
+$blockWidth: 80px;
+$playerWidth: $blockWidth * $numberOfBlocks;
+
+$buttonSize: 100px;
+
+$inactiveButtonColor: #888;
+$activeButtonColor: black;
+
+$fulfilledColor: #ED9939;
+$unfulfilledColor: #C0C0C0;
+
+@mixin circleButton($size) {
+  width: $size;
+  height: $size;
+  border: 3px solid $activeButtonColor;
+  border-radius: 100%;
+}
+
+@mixin changeBorderColorOnHover() {
+  transition: border-color 0.3s ease;
+  &:hover {
+    border-color: $fulfilledColor;
+  }
+}
+
+.player {
+  width: $playerWidth;
+  margin: auto;
+  vertical-align: middle;
+  //background: #eeeeee;
+
+  &__visualization {
+    width: 100%;
+    text-align: center;
+
+    canvas {
+      display: block;
+      width: $playerWidth;
+      height: 500px;
+      margin: auto;
+      background: black;
+    }
+
+    &__progress {
+      width: 100%;
+      height: 15px;
+      background: $unfulfilledColor;
+
+      &__left {
+        position: relative;
+        width: 35%;
+        height: 100%;
+        background: $fulfilledColor;
+      }
+    }
+
+    &__time {
+      display: inline-block;
+      font-family: monospace;
+      font-weight: 100;
+      margin-top: 10px;
+
+      &__current, &__duration{
+        font-size: 1.5em;
+      }
+
+      &__delimeter {
+        font-size: 2em;
+      }
+    }
+  }
+
+  &__controls {
+
+    &__playpause {
+
+      &_play, &_pause, &_inactive {
+        @include circleButton($buttonSize);
+        margin: 10px auto auto;
+      }
+
+      &_play, &_pause{
+        @include changeBorderColorOnHover();
+      }
+
+      &_play {
+
+        &::after {
+          display: block;
+          position: absolute;
+          width: 0;
+          height: 0;
+          border-top: 20px solid transparent;
+          border-left: 34px solid $activeButtonColor;
+          border-bottom: 20px solid transparent;
+          margin-left: 37px;
+          margin-top: 30px;
+          content: '';
+        }
+      }
+
+      &_pause {
+
+        &::before {
+          display: block;
+          position: absolute;
+          width: 10px;
+          height: 40px;
+          background: $activeButtonColor;
+          margin-left: 37px;
+          margin-top: 30px;
+          content: '';
+        }
+
+        &::after {
+          display: block;
+          position: absolute;
+          width: 10px;
+          height: 40px;
+          background: $activeButtonColor;
+          margin-left: 52px;
+          margin-top: 30px;
+          content: '';
+        }
+      }
+
+      &_inactive {
+
+        border-color: $inactiveButtonColor;
+        &::after {
+          display: block;
+          position: absolute;
+          width: 0;
+          height: 0;
+          border-top: 20px solid transparent;
+          border-left: 34px solid $inactiveButtonColor;
+          border-bottom: 20px solid transparent;
+          margin-left: 37px;
+          margin-top: 30px;
+          content: '';
+        }
+      }
+    }
+
+    &__settings {
+      @include circleButton($buttonSize / 2);
+      @include changeBorderColorOnHover();
+      position: absolute;
+      top: 25px;
+      margin-left: 11 * $blockWidth;
+
+      background-size: contain;
+      background: white url('gear.svg') no-repeat center;
+    }
+
+    &__volume {
+      @include circleButton(2 * $buttonSize);
+
+      border-width: 1px;
+      position: absolute;
+      margin-top: -150px;
+      margin-left: 10 * $blockWidth;
+
+      background-color: $unfulfilledColor;
+
+      &__inside {
+        @include circleButton(2 * $buttonSize - 40px);
+
+        margin-left: 18px;
+        margin-top: 18px;
+        border-width: 1px;
+
+        background-color: white;
+
+        &::after {
+          position: absolute;
+          margin-left: $blockWidth - 4px;
+          margin-top: 2 * $blockWidth;
+
+          width: 10px;
+          height: 22px;
+          content: '';
+          display: block;
+          background: black;
+        }
+      }
+    }
+  }
+}

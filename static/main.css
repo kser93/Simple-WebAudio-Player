@@ -1,0 +1,126 @@
+.player {
+  width: 960px;
+  margin: auto;
+  vertical-align: middle; }
+  .player__visualization {
+    width: 100%;
+    text-align: center; }
+    .player__visualization canvas {
+      display: block;
+      width: 960px;
+      height: 500px;
+      margin: auto;
+      background: black; }
+    .player__visualization__progress {
+      width: 100%;
+      height: 15px;
+      background: #C0C0C0; }
+      .player__visualization__progress__left {
+        position: relative;
+        width: 35%;
+        height: 100%;
+        background: #ED9939; }
+    .player__visualization__time {
+      display: inline-block;
+      font-family: monospace;
+      font-weight: 100;
+      margin-top: 10px; }
+      .player__visualization__time__current, .player__visualization__time__duration {
+        font-size: 1.5em; }
+      .player__visualization__time__delimeter {
+        font-size: 2em; }
+  .player__controls__playpause_play, .player__controls__playpause_pause, .player__controls__playpause_inactive {
+    width: 100px;
+    height: 100px;
+    border: 3px solid black;
+    border-radius: 100%;
+    margin: 10px auto auto; }
+  .player__controls__playpause_play, .player__controls__playpause_pause {
+    transition: border-color 0.3s ease; }
+    .player__controls__playpause_play:hover, .player__controls__playpause_pause:hover {
+      border-color: #ED9939; }
+  .player__controls__playpause_play::after {
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-left: 34px solid black;
+    border-bottom: 20px solid transparent;
+    margin-left: 37px;
+    margin-top: 30px;
+    content: ''; }
+  .player__controls__playpause_pause::before {
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 40px;
+    background: black;
+    margin-left: 37px;
+    margin-top: 30px;
+    content: ''; }
+  .player__controls__playpause_pause::after {
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 40px;
+    background: black;
+    margin-left: 52px;
+    margin-top: 30px;
+    content: ''; }
+  .player__controls__playpause_inactive {
+    border-color: #888; }
+    .player__controls__playpause_inactive::after {
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-top: 20px solid transparent;
+      border-left: 34px solid #888;
+      border-bottom: 20px solid transparent;
+      margin-left: 37px;
+      margin-top: 30px;
+      content: ''; }
+  .player__controls__settings {
+    width: 50px;
+    height: 50px;
+    border: 3px solid black;
+    border-radius: 100%;
+    transition: border-color 0.3s ease;
+    position: absolute;
+    top: 25px;
+    margin-left: 880px;
+    background-size: contain;
+    background: white url("gear.svg") no-repeat center; }
+    .player__controls__settings:hover {
+      border-color: #ED9939; }
+  .player__controls__volume {
+    width: 200px;
+    height: 200px;
+    border: 3px solid black;
+    border-radius: 100%;
+    border-width: 1px;
+    position: absolute;
+    margin-top: -150px;
+    margin-left: 800px;
+    background-color: #C0C0C0; }
+    .player__controls__volume__inside {
+      width: 160px;
+      height: 160px;
+      border: 3px solid black;
+      border-radius: 100%;
+      margin-left: 18px;
+      margin-top: 18px;
+      border-width: 1px;
+      background-color: white; }
+      .player__controls__volume__inside::after {
+        position: absolute;
+        margin-left: 76px;
+        margin-top: 160px;
+        width: 10px;
+        height: 22px;
+        content: '';
+        display: block;
+        background: black; }
+
+/*# sourceMappingURL=main.css.map */
