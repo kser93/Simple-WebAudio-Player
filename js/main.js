@@ -20,23 +20,21 @@ requirejs({
 
 define(
     [
-        //'components/UIController',
-        //'components/AudioController',
-        //'components/EventAggregator',
+        'components/AudioController',
+        'components/EventDispatcher',
         'components/ui/VolumeControl',
-        'components/ui/ProgressBar'
+        'components/ui/ProgressBar',
+        'components/ui/PlayPauseButton'
     ],
     function(
-        //UIController,
-        //AudioController,
-        //EventAggregator,
+        AudioController,
+        EventDispatcher,
         VolumeControl,
-        ProgressBar
+        ProgressBar,
+        PlayPauseButton
     ) {
-    //console.log(UIController);
-    //console.log(AudioController);
-    //AudioController.test();
-    //    VolumeControl.displayVolume(35);
+        AudioController.test();
+        //VolumeControl.displayVolume(100);
         //ProgressBar.displayProgress(35);
 });
 

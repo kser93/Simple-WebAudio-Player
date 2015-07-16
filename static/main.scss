@@ -163,7 +163,7 @@ $unfulfilledColor: #C0C0C0;
       margin-top: -150px;
       margin-left: 10 * $blockWidth;
 
-      background-color: $unfulfilledColor;
+      background-color: $fulfilledColor;
 
       &__inside {
         @include circleButton($innerSize);
@@ -185,7 +185,7 @@ $unfulfilledColor: #C0C0C0;
       }
 
       &::after {
-        $delimeterWidth: 6px;
+        $delimeterWidth: 2px;
         display: block;
         width: $delimeterWidth;
         height: $progressHeight;

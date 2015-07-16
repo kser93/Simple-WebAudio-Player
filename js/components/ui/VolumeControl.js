@@ -1,9 +1,11 @@
 define(
     [
-        'backbone'
+        'backbone',
+        'components/EventDispatcher'
     ],
     function(
-        Backbone
+        Backbone,
+        EventDispatcher
     ) {
         var $el = $('.player__controls__volume');
 
@@ -37,7 +39,7 @@ define(
             }
         }, Backbone.Events);
 
-        var setVolume = function(e) {
+        var computeVolume = function(e) {
             var degree = 0,
                 target= {
                     x: e.pageX - $el.offset().left,
@@ -90,21 +92,25 @@ define(
             return Math.round(degree / 3.6);
         };
 
+        var setVolume = function(e) {
+            var volume = computeVolume(e);
+            VolumeControl.displayVolume(volume);
+            EventDispatcher.trigger('changeVolume', volume);
+        };
+
         $el
         .mousedown(function() {
             $el
             .mousemove(function(e) {
                 $el.css('cursor', 'default');
-                var volume = setVolume(e);
-                VolumeControl.displayVolume(volume);
+                setVolume(e);
             })
             .mouseup(function() {
                 $el.off('mousemove');
             });
         })
         .click(function(e) {
-            var volume = setVolume(e);
-            VolumeControl.displayVolume(volume);
+                setVolume(e);
         });
 
         return VolumeControl;

@@ -100,7 +100,7 @@
     position: absolute;
     margin-top: -150px;
     margin-left: 800px;
-    background-color: #C0C0C0; }
+    background-color: #ED9939; }
     .player__controls__volume__inside {
       width: 170px;
       height: 170px;
@@ -118,9 +118,9 @@
         font-size: 2em; }
     .player__controls__volume::after {
       display: block;
-      width: 6px;
+      width: 2px;
       height: 15px;
-      margin-left: 97px;
+      margin-left: 99px;
       background: black;
       content: ''; }
 

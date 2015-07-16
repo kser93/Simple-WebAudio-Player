@@ -1,11 +1,11 @@
 define(
     [
         'backbone',
-        'components/EventAggregator'
+        'components/EventDispatcher'
     ],
     function(
         Backbone,
-        EventAggregator
+        EventDispatcher
     ) {
         var AudioController = _.extend({}, Backbone.Events);
 
@@ -30,57 +30,58 @@ define(
             startTime = 0,
             startOffset = 0;
 
-        AudioController.play = function() {
+        var play = function() {
             console.log(nodes.source.buffer);
             startTime = ctx.currentTime;
             nodes.updateSourceNode();
             nodes.source.start(0, startOffset % nodes.source.buffer.duration);
         };
 
-        AudioController.pause = function() {
+        var pause = function() {
             console.log(nodes.source.buffer);
             nodes.source.stop(0);
             startOffset += (ctx.currentTime - startTime);
         };
 
-        AudioController.listenTo(EventAggregator, 'play', AudioController.play);
-        AudioController.listenTo(EventAggregator, 'pause', AudioController.pause);
+        AudioController.listenTo(EventDispatcher, 'play', play);
+        AudioController.listenTo(EventDispatcher, 'pause', pause);
 
         AudioController.test = function() {
             var req = new XMLHttpRequest();
-            req.open("GET","italiano.mp3",true);
+            req.open("GET","static/italiano.mp3",true);
             req.responseType = "arraybuffer";
             req.onload = function() {
                 ctx.decodeAudioData(req.response, function(_buffer) {
                     buffer = _buffer;
-                    AudioController.play();
-
-                    EventAggregator.trigger('ready');
-                    updateProgress();
-
+                    play();
+                    EventDispatcher.trigger('ready');
                 });
             };
             req.send();
         };
+        //
+        //var updateProgress = function() {
+        //    /*
+        //    * вызывается, когда трек запущен
+        //    * обновляет текущее время трека
+        //    * производит событие timeUpdated
+        //    * повторяется при помощи requestAnimationFrame
+        //    * останавливается, когда трек на паузе(???)
+        //    *
+        //    */
+        //    var step = function(timestamp) {
+        //        //startOffset += (ctx.currentTime - startTime);
+        //        //var progress = startOffset / nodes.source.duration;
+        //        console.log(timestamp);
+        //
+        //        requestAnimationFrame(step);
+        //    };
+        //    requestAnimationFrame(step);
+        //};
 
-        var updateProgress = function() {
-            /*
-            * вызывается, когда трек запущен
-            * обновляет текущее время трека
-            * производит событие timeUpdated
-            * повторяется при помощи requestAnimationFrame
-            * останавливается, когда трек на паузе(???)
-            *
-            */
-            var step = function(timestamp) {
-                //startOffset += (ctx.currentTime - startTime);
-                //var progress = startOffset / nodes.source.duration;
-                console.log(timestamp);
 
-                requestAnimationFrame(step);
-            };
-            requestAnimationFrame(step);
-        };
-
+        AudioController.listenTo(EventDispatcher, 'changeVolume', function(volume) {
+            nodes.volume.gain.value = volume / 100;
+        });
         return AudioController;
 });

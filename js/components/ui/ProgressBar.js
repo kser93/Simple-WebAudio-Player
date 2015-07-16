@@ -25,7 +25,6 @@ define(
 
         var setProgress = function(e) {
             var x = Math.round(e.pageX - $el.offset().left);
-
             return Math.round(100 * x/$el.width());
         };
 
