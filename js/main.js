@@ -20,18 +20,21 @@ requirejs({
 
 define(
     [
-        'components/UIController',
-        'components/AudioController',
-        'components/EventAggregator'
+        //'components/UIController',
+        //'components/AudioController',
+        //'components/EventAggregator',
+        'components/ui/VolumeControl'
     ],
     function(
-        UIController,
-        AudioController,
-        EventAggregator
+        //UIController,
+        //AudioController,
+        //EventAggregator,
+        VolumeControl
     ) {
-    console.log(UIController);
-    console.log(AudioController);
-    AudioController.test();
+    //console.log(UIController);
+    //console.log(AudioController);
+    //AudioController.test();
+        VolumeControl.displayVolume(35);
 });
 
 //var audioCtx, buf;

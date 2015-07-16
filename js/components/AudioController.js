@@ -7,66 +7,80 @@ define(
         Backbone,
         EventAggregator
     ) {
-    var AudioController = _.extend({}, Backbone.Events);
+        var AudioController = _.extend({}, Backbone.Events);
 
-    AudioController.context = new AudioContext();
-    AudioController.nodes = {
-        source: AudioController.context.createBufferSource(),
-        volume: AudioController.context.createGain(),
-        destination: AudioController.context.destination,
+        var ctx = new AudioContext(),
+            buffer = null,
+            nodes = {
+                source: ctx.createBufferSource(),
+                volume: ctx.createGain(),
+                destination: ctx.destination,
+                connectGraph: function() {
+                    nodes.source.connect(nodes.volume);
+                    nodes.volume.connect(nodes.destination);
+                },
+                updateSourceNode: function() {
+                    var newSource = ctx.createBufferSource();
+                    newSource.buffer = buffer;
 
-        connectGraph: function() {
-            AudioController.nodes.source.connect(
-                AudioController.nodes.volume
-            );
-            AudioController.nodes.volume.connect(
-                AudioController.nodes.destination
-            );
-        },
+                    nodes.source = newSource;
+                    nodes.connectGraph();
+                }
+            },
+            startTime = 0,
+            startOffset = 0;
 
-        updateSourceNode: function() {
-            var newSource = AudioController.context.createBufferSource();
-            newSource.buffer = AudioController.nodes.source.buffer;
-
-            AudioController.nodes.source = newSource;
-            AudioController.nodes.connectGraph();
-        }
-    };
-    AudioController.startTime = 0;
-    AudioController.startOffset = 0;
-
-    AudioController.play = function() {
-        AudioController.startTime = AudioController.context.currentTime;
-        AudioController.nodes.updateSourceNode();
-        AudioController.nodes.source.start(0, AudioController.startOffset % AudioController.nodes.source.buffer.duration);
-        //console.log(AudioController.startTime);
-        //console.log(AudioController.startOffset);
-    };
-
-    AudioController.pause = function() {
-        AudioController.nodes.source.stop(0);
-        AudioController.startOffset += (AudioController.context.currentTime - AudioController.startTime);
-        //console.log(AudioController.startTime);
-        //console.log(AudioController.startOffset);
-    };
-
-    AudioController.listenTo(EventAggregator, 'play', AudioController.play);
-    AudioController.listenTo(EventAggregator, 'pause', AudioController.pause);
-
-    AudioController.test = function() {
-        var req = new XMLHttpRequest();
-        req.open("GET","italiano.mp3",true);
-        req.responseType = "arraybuffer";
-        req.onload = function() {
-            AudioController.context.decodeAudioData(req.response, function(buffer) {
-                //src.connect(AudioController.nodes.destination);
-                AudioController.nodes.source.buffer = buffer;
-                AudioController.play();
-                EventAggregator.trigger('ready');
-            });
+        AudioController.play = function() {
+            console.log(nodes.source.buffer);
+            startTime = ctx.currentTime;
+            nodes.updateSourceNode();
+            nodes.source.start(0, startOffset % nodes.source.buffer.duration);
         };
-        req.send();
-    };
 
-    return AudioController;
+        AudioController.pause = function() {
+            console.log(nodes.source.buffer);
+            nodes.source.stop(0);
+            startOffset += (ctx.currentTime - startTime);
+        };
+
+        AudioController.listenTo(EventAggregator, 'play', AudioController.play);
+        AudioController.listenTo(EventAggregator, 'pause', AudioController.pause);
+
+        AudioController.test = function() {
+            var req = new XMLHttpRequest();
+            req.open("GET","italiano.mp3",true);
+            req.responseType = "arraybuffer";
+            req.onload = function() {
+                ctx.decodeAudioData(req.response, function(_buffer) {
+                    buffer = _buffer;
+                    AudioController.play();
+
+                    EventAggregator.trigger('ready');
+                    updateProgress();
+
+                });
+            };
+            req.send();
+        };
+
+        var updateProgress = function() {
+            /*
+            * вызывается, когда трек запущен
+            * обновляет текущее время трека
+            * производит событие timeUpdated
+            * повторяется при помощи requestAnimationFrame
+            * останавливается, когда трек на паузе(???)
+            *
+            */
+            var step = function(timestamp) {
+                //startOffset += (ctx.currentTime - startTime);
+                //var progress = startOffset / nodes.source.duration;
+                console.log(timestamp);
+
+                requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        };
+
+        return AudioController;
 });
