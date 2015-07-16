@@ -23,18 +23,21 @@ define(
         //'components/UIController',
         //'components/AudioController',
         //'components/EventAggregator',
-        'components/ui/VolumeControl'
+        'components/ui/VolumeControl',
+        'components/ui/ProgressBar'
     ],
     function(
         //UIController,
         //AudioController,
         //EventAggregator,
-        VolumeControl
+        VolumeControl,
+        ProgressBar
     ) {
     //console.log(UIController);
     //console.log(AudioController);
     //AudioController.test();
-        VolumeControl.displayVolume(35);
+    //    VolumeControl.displayVolume(35);
+        //ProgressBar.displayProgress(35);
 });
 
 //var audioCtx, buf;

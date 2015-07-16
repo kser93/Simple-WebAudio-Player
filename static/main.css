@@ -18,11 +18,6 @@
       width: 100%;
       height: 15px;
       background: #C0C0C0; }
-      .player__visualization__progress__left {
-        position: relative;
-        width: 35%;
-        height: 100%;
-        background: #ED9939; }
     .player__visualization__time {
       display: inline-block;
       margin-top: 10px; }
