@@ -9,35 +9,7 @@ define(
     ) {
         var $el = $('.player__controls__volume');
 
-        var VolumeControl = _.extend({
-            displayVolume: function(volume) {
-                if (volume < 0) {
-                    volume = 0;
-                }
-                else if (volume > 100) {
-                    volume = 100;
-                }
-                var degrees = volume * 3.6;
-
-                if (degrees <= 180){
-                    $el.css(
-                        'background',
-                        'linear-gradient(' + (270+degrees) + 'deg, transparent 50%, #C0C0C0 50%),' +
-                        'linear-gradient(270deg, #C0C0C0 50%, transparent 50%),' +
-                        '#ED9939'
-                    );
-                }
-                else {
-                    $el.css(
-                        'background',
-                        'linear-gradient(' + (degrees - 270) + 'deg, transparent 50%, #ED9939 50%),' +
-                        'linear-gradient(90deg, #ED9939 50%, transparent 50%),' +
-                        '#C0C0C0'
-                    );
-                }
-                $el.find('[class$=value]').text(volume+'%');
-            }
-        }, Backbone.Events);
+        var VolumeControl = _.extend({}, Backbone.Events);
 
         var computeVolume = function(e) {
             var degree = 0,
@@ -92,9 +64,37 @@ define(
             return Math.round(degree / 3.6);
         };
 
+        var displayVolume = function(volume) {
+            if (volume < 0) {
+                volume = 0;
+            }
+            else if (volume > 100) {
+                volume = 100;
+            }
+            var degrees = volume * 3.6;
+
+            if (degrees <= 180){
+                $el.css(
+                    'background',
+                    'linear-gradient(' + (270+degrees) + 'deg, transparent 50%, #C0C0C0 50%),' +
+                    'linear-gradient(270deg, #C0C0C0 50%, transparent 50%),' +
+                    '#ED9939'
+                );
+            }
+            else {
+                $el.css(
+                    'background',
+                    'linear-gradient(' + (degrees - 270) + 'deg, transparent 50%, #ED9939 50%),' +
+                    'linear-gradient(90deg, #ED9939 50%, transparent 50%),' +
+                    '#C0C0C0'
+                );
+            }
+            $el.find('[class$=value]').text(volume+'%');
+        };
+
         var setVolume = function(e) {
             var volume = computeVolume(e);
-            VolumeControl.displayVolume(volume);
+            displayVolume(volume);
             EventDispatcher.trigger('changeVolume', volume);
         };
 
@@ -110,7 +110,7 @@ define(
             });
         })
         .click(function(e) {
-                setVolume(e);
+            setVolume(e);
         });
 
         return VolumeControl;

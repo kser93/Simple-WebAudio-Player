@@ -34,8 +34,6 @@ define(
         PlayPauseButton
     ) {
         AudioController.test();
-        //VolumeControl.displayVolume(100);
-        //ProgressBar.displayProgress(35);
 });
 
 //var audioCtx, buf;

@@ -9,21 +9,7 @@ define(
     ) {
         var $el = $('[class*=controls][class*=playpause]');
 
-        var PlayPauseButton = _.extend({
-            displayProgress: function(progress) {
-                if (progress < 0) {
-                    progress = 0;
-                }
-                else if (progress > 100) {
-                    progress = 100;
-                }
-                $el.css(
-                    'background',
-                    'linear-gradient(to right, #ED9939 ' + progress + '%, transparent ' + progress + '%), ' +
-                    '#C0C0C0'
-                );
-            }
-        }, Backbone.Events);
+        var PlayPauseButton = _.extend({}, Backbone.Events);
 
         var enable = function() {
             console.log($el);
