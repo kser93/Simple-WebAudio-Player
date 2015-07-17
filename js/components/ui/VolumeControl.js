@@ -71,6 +71,9 @@ define(
             else if (volume > 100) {
                 volume = 100;
             }
+            else {
+                volume = Math.round(volume / 5) * 5;
+            }
             var degrees = volume * 3.6;
 
             if (degrees <= 180){
