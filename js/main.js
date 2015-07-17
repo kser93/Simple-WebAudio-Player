@@ -23,17 +23,17 @@ define(
         'components/AudioController',
         'components/EventDispatcher',
         'components/ui/VolumeControl',
-        'components/ui/ProgressBar',
+        'components/ui/ProgressControl',
         'components/ui/PlayPauseButton'
     ],
     function(
         AudioController,
         EventDispatcher,
         VolumeControl,
-        ProgressBar,
+        ProgressControl,
         PlayPauseButton
     ) {
-        AudioController.test();
+        AudioController.testMedia();
 });
 
 //var audioCtx, buf;

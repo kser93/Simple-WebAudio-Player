@@ -12,7 +12,6 @@ define(
         var PlayPauseButton = _.extend({}, Backbone.Events);
 
         var enable = function() {
-            console.log($el);
             $el.addClass('player__controls__playpause_pause');
             $el.removeClass('player__controls__playpause_inactive');
         };
