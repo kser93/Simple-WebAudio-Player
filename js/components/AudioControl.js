@@ -14,10 +14,12 @@ define(
         var ctx = new AudioContext(),
             nodes = {
                 source: ctx.createMediaElementSource(audio),
+                analyser: ctx.createAnalyser(),
                 volume: ctx.createGain(),
                 destination: ctx.destination,
                 connectGraph: function() {
-                    nodes.source.connect(nodes.volume);
+                    nodes.source.connect(nodes.analyser);
+                    nodes.analyser.connect(nodes.volume);
                     nodes.volume.connect(nodes.destination);
                 }
             };
@@ -42,7 +44,7 @@ define(
                 EventDispatcher.trigger(
                     'ready',
                     {
-                        duration: audio.duration,
+                        duration: audio.duration
                     }
                 );
             })

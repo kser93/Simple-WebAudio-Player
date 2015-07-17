@@ -1,4 +1,3 @@
 .idea/
-js/lib/
+#js/lib/
 *.css.map
-*.mp3

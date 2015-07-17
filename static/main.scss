@@ -58,6 +58,8 @@ $unfulfilledColor: #C0C0C0;
       width: 100%;
       height: 15px;
       background: $unfulfilledColor;
+      //border: 3px solid black;
+      //box-sizing: border-box;
     }
 
     &__time {
@@ -173,6 +175,7 @@ $unfulfilledColor: #C0C0C0;
       margin-left: 10 * $blockWidth;
 
       background-color: $fulfilledColor;
+      box-shadow: 0 2px 2px;
 
       &__inside {
         @include circleButton($innerSize);

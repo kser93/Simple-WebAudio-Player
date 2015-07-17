@@ -2,8 +2,8 @@ requirejs({
     baseUrl: 'js',
     paths: {
         jquery: 'lib/jquery-2.1.4.min',
-        underscore: 'lib/underscore',
-        backbone: 'lib/backbone',
+        underscore: 'lib/underscore-min',
+        backbone: 'lib/backbone-min',
         id3: 'lib/id3-minimized'
 
     },
