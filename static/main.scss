@@ -34,18 +34,24 @@ $unfulfilledColor: #C0C0C0;
   width: $playerWidth;
   margin: auto;
   vertical-align: middle;
-  //background: #eeeeee;
 
   &__visualization {
     width: 100%;
     text-align: center;
 
-    canvas {
+    &__screen {
       display: block;
       width: $playerWidth;
       height: 500px;
       margin: auto;
       background: black;
+      border: 1px solid black;
+      box-sizing: border-box;
+
+      &.hover {
+        background: $fulfilledColor;
+        border: 3px dashed black;
+      }
     }
 
     &__progress {
@@ -67,22 +73,25 @@ $unfulfilledColor: #C0C0C0;
         font-size: 3em;
       }
     }
+
+    &__tags {
+      display: block;
+      font-family: sans-serif;
+    }
   }
 
   &__controls {
 
     &__playpause {
+      @include circleButton($buttonSize);
 
-      &_play, &_pause, &_inactive {
-        @include circleButton($buttonSize);
-        margin: 10px auto auto;
-      }
+      margin: 10px auto auto;
 
-      &_play, &_pause{
+      &.play, &.pause{
         @include changeBorderColorOnHover();
       }
 
-      &_play {
+      &.play {
 
         &::after {
           display: block;
@@ -98,7 +107,7 @@ $unfulfilledColor: #C0C0C0;
         }
       }
 
-      &_pause {
+      &.pause {
 
         &::before {
           display: block;
@@ -123,7 +132,7 @@ $unfulfilledColor: #C0C0C0;
         }
       }
 
-      &_inactive {
+      &.inactive {
 
         border-color: $inactiveButtonColor;
         &::after {

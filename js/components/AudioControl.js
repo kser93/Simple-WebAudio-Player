@@ -9,7 +9,7 @@ define(
     ) {
         var audio = $('audio')[0];
 
-        var AudioController = _.extend({}, Backbone.Events);
+        var AudioControl = _.extend({}, Backbone.Events);
 
         var ctx = new AudioContext(),
             nodes = {
@@ -30,22 +30,19 @@ define(
             audio.pause();
         };
 
-        AudioController.listenTo(EventDispatcher, 'play', play);
-        AudioController.listenTo(EventDispatcher, 'pause', pause);
-
-        AudioController.testMedia = function() {
-            audio.src = "static/ghostdivision.mp3";
-            audio.load();
+        AudioControl.listenTo(EventDispatcher, 'playFile', function(src) {
             nodes.connectGraph();
-            play();
-        };
+            audio.src = src;
+
+            audio.play();
+        });
 
         $(audio)
-            .on('loadeddata', function() {
+            .on('canplay', function() {
                 EventDispatcher.trigger(
                     'ready',
                     {
-                        duration: audio.duration
+                        duration: audio.duration,
                     }
                 );
             })
@@ -57,11 +54,12 @@ define(
                         currentTime: Math.round(audio.currentTime)
                     }
                 );
-                console.log('now: ' + audio.currentTime + '; full: ' + audio.duration + '; progress: ' + Math.round());
             });
 
-        AudioController.listenTo(EventDispatcher, 'changeVolume', function(volume) {
+        AudioControl.listenTo(EventDispatcher, 'play', play);
+        AudioControl.listenTo(EventDispatcher, 'pause', pause);
+        AudioControl.listenTo(EventDispatcher, 'changeVolume', function(volume) {
             nodes.volume.gain.value = volume / 100;
         });
-        return AudioController;
+        return AudioControl;
 });

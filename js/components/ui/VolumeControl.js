@@ -61,19 +61,18 @@ define(
                 }
             }
 
-            return Math.round(degree / 3.6);
+            var volume = Math.round(degree / 3.6);
+            if (volume < 5) {
+                volume = 0;
+            }
+            else {
+                volume = Math.ceil(volume / 5) * 5;
+            }
+            return volume;
         };
 
         var displayVolume = function(volume) {
-            if (volume < 0) {
-                volume = 0;
-            }
-            else if (volume > 100) {
-                volume = 100;
-            }
-            else {
-                volume = Math.round(volume / 5) * 5;
-            }
+
             var degrees = volume * 3.6;
 
             if (degrees <= 180){
