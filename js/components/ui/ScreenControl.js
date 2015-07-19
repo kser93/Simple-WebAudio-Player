@@ -28,7 +28,9 @@ define(
                 tags += meta.title;
             }
             $('[class*=visualization][class*=tags]').text(tags);
-            displayCover(meta.cover);
+            if (meta.cover) {
+                displayCover(meta.cover);
+            }
         };
 
         var displayCover = function(cover) {
@@ -37,6 +39,9 @@ define(
 
         var arrayToImage = function(array) {
             var base64String = "";
+            if (!array) {
+                return null;
+            }
             for (var i = 0; i < array.data.length; i++) {
                 base64String += String.fromCharCode(array.data[i]);
             }

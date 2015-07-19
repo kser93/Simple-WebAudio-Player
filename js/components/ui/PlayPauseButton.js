@@ -13,19 +13,31 @@ define(
 
         var enable = function() {
             $el.addClass('pause');
+            $el.removeClass('play');
             $el.removeClass('inactive');
         };
 
+        var setPauseStyle = function() {
+            $el.removeClass('pause');
+            $el.addClass('play');
+        };
+
+        var setPlayStyle = function() {
+            $el.removeClass('play');
+            $el.addClass('pause');
+
+        };
+
         PlayPauseButton.listenTo(EventDispatcher, 'ready', enable);
+        PlayPauseButton.listenTo(EventDispatcher, 'ended', setPauseStyle);
+
         $el.click(function() {
             if ($el.is('.play')) {
-                $el.removeClass('play');
-                $el.addClass('pause');
+                setPlayStyle();
                 EventDispatcher.trigger('play');
             }
             else if ($el.is('.pause')) {
-                $el.removeClass('pause');
-                $el.addClass('play');
+                setPauseStyle();
                 EventDispatcher.trigger('pause');
             }
         });

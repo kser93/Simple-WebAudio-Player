@@ -56,6 +56,9 @@ define(
                         currentTime: Math.round(audio.currentTime)
                     }
                 );
+            })
+            .on('ended', function() {
+                EventDispatcher.trigger('ended');
             });
 
         AudioControl.listenTo(EventDispatcher, 'play', play);
