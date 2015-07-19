@@ -109,7 +109,7 @@
     margin-top: -150px;
     margin-left: 800px;
     background-color: #ED9939;
-    box-shadow: 0 2px 2px; }
+    box-shadow: 0 4px 4px #C0C0C0; }
     .player__controls__volume__inside {
       width: 170px;
       height: 170px;

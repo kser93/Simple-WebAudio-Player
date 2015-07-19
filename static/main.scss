@@ -175,7 +175,7 @@ $unfulfilledColor: #C0C0C0;
       margin-left: 10 * $blockWidth;
 
       background-color: $fulfilledColor;
-      box-shadow: 0 2px 2px;
+      box-shadow: 0 4px 4px $unfulfilledColor;
 
       &__inside {
         @include circleButton($innerSize);
