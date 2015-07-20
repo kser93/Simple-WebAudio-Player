@@ -55,24 +55,26 @@ $unfulfilledColor: #C0C0C0;
     }
 
     &__progress {
-      width: 100%;
-      height: 15px;
-      background: $unfulfilledColor;
-      //border: 3px solid black;
-      //box-sizing: border-box;
-    }
-
-    &__time {
-      display: inline-block;
-      margin-top: 10px;
-
-      &__current, &__duration{
-        font-family: LCD7, monospace;
+      &__bar {
+        width: 100%;
+        height: 15px;
+        background: $unfulfilledColor;
+        //border: 3px solid black;
+        //box-sizing: border-box;
       }
 
-      &__delimeter {
-        font-family: monospace;
-        font-size: 3em;
+      &__time {
+        display: inline-block;
+        margin-top: 10px;
+
+        &__current, &__duration {
+          font-family: LCD7, monospace;
+        }
+
+        &__delimeter {
+          font-family: monospace;
+          font-size: 3em;
+        }
       }
     }
 
@@ -89,11 +91,11 @@ $unfulfilledColor: #C0C0C0;
 
       margin: 10px auto auto;
 
-      &.play, &.pause{
+      &.js-state-play, &.js-state-pause {
         @include changeBorderColorOnHover();
       }
 
-      &.play {
+      &.js-state-play {
 
         &::after {
           display: block;
@@ -109,7 +111,7 @@ $unfulfilledColor: #C0C0C0;
         }
       }
 
-      &.pause {
+      &.js-state-pause {
 
         &::before {
           display: block;
@@ -134,7 +136,7 @@ $unfulfilledColor: #C0C0C0;
         }
       }
 
-      &.inactive {
+      &.js-state-inactive {
 
         border-color: $inactiveButtonColor;
         &::after {

@@ -11,16 +11,18 @@
             <audio></audio>
             <div class="player__visualization">
                 <canvas class="player__visualization__screen" id="canvas" width="960" height="500"></canvas>
-                <div class="player__visualization__progress"></div>
-                <div class="player__visualization__time">
-                    <span class="player__visualization__time__current">--:--</span>
-                    <span class="player__visualization__time__delimeter">/</span>
-                    <span class="player__visualization__time__duration">--:--</span>
+                <div class="player__visualization__progress">
+                    <div class="player__visualization__progress__bar"></div>
+                    <div class="player__visualization__progress__time">
+                        <span class="player__visualization__progress__time__current">--:--</span>
+                        <span class="player__visualization__progress__time__delimeter">/</span>
+                        <span class="player__visualization__progress__time__duration">--:--</span>
+                    </div>
                 </div>
                 <span class="player__visualization__tags">Чтобы прослушать композицию, перетащите её на черную область</span>
             </div>
             <div class="player__controls">
-                <div class="player__controls__playpause inactive"></div>
+                <div class="player__controls__playpause"></div>
                 <div class="player__controls__volume">
                     <div class="player__controls__volume__inside">
                         <span class="player__controls__volume__inside__value">100%</span>

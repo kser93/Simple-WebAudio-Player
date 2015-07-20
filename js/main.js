@@ -27,16 +27,22 @@ define(
         'components/AudioControl',
         'components/EventDispatcher',
         'components/ui/VolumeControl',
-        'components/ui/ProgressControl',
-        'components/ui/PlayPauseButton',
-        'components/ui/ScreenControl'
+        'components/ui/ScreenControl',
+        'components/PlayPauseButton/model',
+        'components/PlayPauseButton/view',
+        'components/Progress/model',
+        'components/Progress/view'
     ],
     function(
         AudioControl,
         EventDispatcher,
         VolumeControl,
-        ProgressControl,
-        PlayPauseButton,
-        ScreenControl
+        ScreenControl,
+        PlayPauseButtonModel,
+        PlayPauseButtonView,
+        ProgressModel,
+        ProgressView
     ) {
+        var playPauseButton = new PlayPauseButtonView({model: new PlayPauseButtonModel()});
+        var Progress = new ProgressView({model: new ProgressModel()});
 });

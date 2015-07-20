@@ -19,16 +19,16 @@
       .player__visualization__screen.hover {
         background: #ED9939;
         border: 3px dashed black; }
-    .player__visualization__progress {
+    .player__visualization__progress__bar {
       width: 100%;
       height: 15px;
       background: #C0C0C0; }
-    .player__visualization__time {
+    .player__visualization__progress__time {
       display: inline-block;
       margin-top: 10px; }
-      .player__visualization__time__current, .player__visualization__time__duration {
+      .player__visualization__progress__time__current, .player__visualization__progress__time__duration {
         font-family: LCD7, monospace; }
-      .player__visualization__time__delimeter {
+      .player__visualization__progress__time__delimeter {
         font-family: monospace;
         font-size: 3em; }
     .player__visualization__tags {
@@ -40,11 +40,11 @@
     border: 3px solid black;
     border-radius: 100%;
     margin: 10px auto auto; }
-    .player__controls__playpause.play, .player__controls__playpause.pause {
+    .player__controls__playpause.js-state-play, .player__controls__playpause.js-state-pause {
       transition: border-color 0.3s ease; }
-      .player__controls__playpause.play:hover, .player__controls__playpause.pause:hover {
+      .player__controls__playpause.js-state-play:hover, .player__controls__playpause.js-state-pause:hover {
         border-color: #ED9939; }
-    .player__controls__playpause.play::after {
+    .player__controls__playpause.js-state-play::after {
       display: block;
       position: absolute;
       width: 0;
@@ -55,7 +55,7 @@
       margin-left: 37px;
       margin-top: 30px;
       content: ''; }
-    .player__controls__playpause.pause::before {
+    .player__controls__playpause.js-state-pause::before {
       display: block;
       position: absolute;
       width: 10px;
@@ -64,7 +64,7 @@
       margin-left: 37px;
       margin-top: 30px;
       content: ''; }
-    .player__controls__playpause.pause::after {
+    .player__controls__playpause.js-state-pause::after {
       display: block;
       position: absolute;
       width: 10px;
@@ -73,9 +73,9 @@
       margin-left: 52px;
       margin-top: 30px;
       content: ''; }
-    .player__controls__playpause.inactive {
+    .player__controls__playpause.js-state-inactive {
       border-color: #888; }
-      .player__controls__playpause.inactive::after {
+      .player__controls__playpause.js-state-inactive::after {
         display: block;
         position: absolute;
         width: 0;
