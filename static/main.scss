@@ -48,7 +48,7 @@ $unfulfilledColor: #C0C0C0;
       border: 1px solid black;
       box-sizing: border-box;
 
-      &.hover {
+      &.js-hover {
         background: $fulfilledColor;
         border: 3px dashed black;
       }

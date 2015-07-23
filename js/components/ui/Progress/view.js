@@ -1,7 +1,7 @@
 define(
     [
         'backbone',
-        'components/Progress/model',
+        'components/ui/Progress/model',
         'components/EventDispatcher'
     ],
     function(
@@ -19,7 +19,7 @@ define(
                 this.listenTo(this.model, 'change:currentTime', this.renderCurrentTime);
                 this.listenTo(this.model, 'change:duration', this.renderDuration);
 
-                this.listenTo(EventDispatcher, 'ready', function(args) {
+                this.listenTo(EventDispatcher, 'compositionReady', function(args) {
                     this.model.set({
                         currentTime: 0,
                         duration: args.duration

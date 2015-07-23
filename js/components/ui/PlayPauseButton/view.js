@@ -1,8 +1,8 @@
 define(
     [
         'backbone',
-        'components/PlayPauseButton/model',
-        'components/PlayPauseButton/states',
+        'components/ui/PlayPauseButton/model',
+        'components/ui/PlayPauseButton/states',
         'components/EventDispatcher'
     ],
     function(
@@ -20,8 +20,8 @@ define(
 
             initialize: function() {
                 this.listenTo(this.model, 'change', this.render);
-                this.listenTo(EventDispatcher, 'ready', this.play);
-                this.listenTo(EventDispatcher, 'ended', this.pause);
+                this.listenTo(EventDispatcher, 'compositionReady', this.play);
+                this.listenTo(EventDispatcher, 'compositionFinished', this.pause);
 
                 this.render();
                 return this;

@@ -8,10 +8,10 @@ requirejs({
 
     },
     shim: {
-        'backbone': {
-            deps: ['jquery', 'underscore'],
-            exports: 'Backbone'
-        },
+        //'backbone': {
+        //    deps: ['jquery', 'underscore'],
+        //    exports: 'Backbone'
+        //},
         'underscore': {
             exports: '_'
         },
@@ -27,22 +27,36 @@ define(
         'components/AudioControl',
         'components/EventDispatcher',
         'components/ui/VolumeControl',
-        'components/ui/ScreenControl',
-        'components/PlayPauseButton/model',
-        'components/PlayPauseButton/view',
-        'components/Progress/model',
-        'components/Progress/view'
+
+        'components/ui/PlayPauseButton/model',
+        'components/ui/PlayPauseButton/view',
+
+        'components/ui/Progress/model',
+        'components/ui/Progress/view',
+
+        'components/ui/Screen/model',
+        'components/ui/Screen/view'
     ],
     function(
         AudioControl,
         EventDispatcher,
         VolumeControl,
-        ScreenControl,
+
         PlayPauseButtonModel,
         PlayPauseButtonView,
+
         ProgressModel,
-        ProgressView
+        ProgressView,
+
+        ScreenModel,
+        ScreenView
     ) {
         var playPauseButton = new PlayPauseButtonView({model: new PlayPauseButtonModel()});
-        var Progress = new ProgressView({model: new ProgressModel()});
-});
+        var progress = new ProgressView({model: new ProgressModel()});
+        var screen = new ScreenView({model: new ScreenModel()});
+
+        $('*').on('dragover dragenter dragleave drop', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    });

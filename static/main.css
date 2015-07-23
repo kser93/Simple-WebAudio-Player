@@ -16,7 +16,7 @@
       background: black;
       border: 1px solid black;
       box-sizing: border-box; }
-      .player__visualization__screen.hover {
+      .player__visualization__screen.js-hover {
         background: #ED9939;
         border: 3px dashed black; }
     .player__visualization__progress__bar {

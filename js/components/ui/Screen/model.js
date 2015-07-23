@@ -1,16 +1,16 @@
 define(
     [
         'backbone',
-        'components/PlayPauseButton/states'
+        'components/ui/Screen/states'
     ],
     function(
         Backbone,
         states
     ) {
-
         return Backbone.Model.extend({
             defaults: {
-                state: states.inactive
+                meta: null,
+                visualization: states.cover
             }
         });
     }

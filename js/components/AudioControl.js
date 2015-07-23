@@ -1,10 +1,12 @@
 define(
     [
         'backbone',
+        'id3',
         'components/EventDispatcher'
     ],
     function(
         Backbone,
+        ID3,
         EventDispatcher
     ) {
         var audio = $('audio')[0];
@@ -24,6 +26,43 @@ define(
                 }
             };
 
+        var recognizeMeta = function(file) {
+            var src = URL.createObjectURL(file);
+            ID3.loadTags(src, function() {
+
+                var arrayToImage = function(array) {
+                    var base64String = "";
+                    if (!array) {
+                        return null;
+                    }
+                    for (var i = 0; i < array.data.length; i++) {
+                        base64String += String.fromCharCode(array.data[i]);
+                    }
+                    var dataUrl = "data:" + array.format + ";base64," + window.btoa(base64String);
+                    var img = new Image;
+                    img.src = dataUrl;
+                    return img;
+                };
+
+                var meta = ID3.getAllTags(src);
+                meta.cover = arrayToImage(meta.picture);
+                EventDispatcher.trigger(
+                    'metaRecognized',
+                    {
+                        artist: meta.artist,
+                        album: meta.album,
+                        title: meta.title,
+                        cover: meta.cover
+                    });
+
+            }, {
+                dataReader: FileAPIReader(file),
+                tags: ['title', 'artist', 'album', 'picture']
+            });
+
+            return src;
+        };
+
         var play = function() {
             audio.play();
         };
@@ -32,17 +71,19 @@ define(
             audio.pause();
         };
 
-        AudioControl.listenTo(EventDispatcher, 'playFile', function(src) {
-            nodes.connectGraph();
-            audio.src = src;
+        var setVolume = function(volume) {
+            nodes.volume.gain.value = volume / 100;
+        };
 
-            audio.play();
+        AudioControl.listenTo(EventDispatcher, 'compositionLoaded', function(file) {
+            nodes.connectGraph();
+            audio.src = recognizeMeta(file);
         });
 
         $(audio)
             .on('canplay', function() {
                 EventDispatcher.trigger(
-                    'ready',
+                    'compositionReady',
                     {
                         duration: audio.duration
                     }
@@ -58,13 +99,11 @@ define(
                 );
             })
             .on('ended', function() {
-                EventDispatcher.trigger('ended');
+                EventDispatcher.trigger('compositionFinished');
             });
 
         AudioControl.listenTo(EventDispatcher, 'play', play);
         AudioControl.listenTo(EventDispatcher, 'pause', pause);
-        AudioControl.listenTo(EventDispatcher, 'changeVolume', function(volume) {
-            nodes.volume.gain.value = volume / 100;
-        });
+        AudioControl.listenTo(EventDispatcher, 'setVolume', setVolume);
         return AudioControl;
 });

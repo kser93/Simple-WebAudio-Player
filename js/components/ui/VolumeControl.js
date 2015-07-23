@@ -97,7 +97,7 @@ define(
         var setVolume = function(e) {
             var volume = computeVolume(e);
             displayVolume(volume);
-            EventDispatcher.trigger('changeVolume', volume);
+            EventDispatcher.trigger('setVolume', volume);
         };
 
         $el
