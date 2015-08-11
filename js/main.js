@@ -12,9 +12,9 @@ requirejs({
         //    deps: ['jquery', 'underscore'],
         //    exports: 'Backbone'
         //},
-        'underscore': {
-            exports: '_'
-        },
+        //'underscore': {
+        //    exports: '_'
+        //},
         id3: {
             exports: 'ID3'
         }
@@ -26,7 +26,9 @@ define(
     [
         'components/AudioControl',
         'components/EventDispatcher',
-        'components/ui/VolumeControl',
+
+        'components/ui/Volume/model',
+        'components/ui/Volume/view',
 
         'components/ui/PlayPauseButton/model',
         'components/ui/PlayPauseButton/view',
@@ -40,7 +42,9 @@ define(
     function(
         AudioControl,
         EventDispatcher,
-        VolumeControl,
+
+        VolumeModel,
+        VolumeView,
 
         PlayPauseButtonModel,
         PlayPauseButtonView,
@@ -54,6 +58,7 @@ define(
         var playPauseButton = new PlayPauseButtonView({model: new PlayPauseButtonModel()});
         var progress = new ProgressView({model: new ProgressModel()});
         var screen = new ScreenView({model: new ScreenModel()});
+        var volumeControl = new VolumeView({model: new VolumeModel()});
 
         $('*').on('dragover dragenter dragleave drop', function(e) {
             e.preventDefault();

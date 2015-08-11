@@ -46,6 +46,7 @@ define(
 
                 var meta = ID3.getAllTags(src);
                 meta.cover = arrayToImage(meta.picture);
+                //console.log(meta);
                 EventDispatcher.trigger(
                     'metaRecognized',
                     {
