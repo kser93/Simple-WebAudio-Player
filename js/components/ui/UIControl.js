@@ -1,32 +1,6 @@
-requirejs({
-    baseUrl: 'js',
-    paths: {
-        jquery: 'lib/jquery-2.1.4.min',
-        'jquery.mousewheel': 'lib/jquery.mousewheel.min',
-        underscore: 'lib/underscore-min',
-        backbone: 'lib/backbone-min',
-        id3: 'lib/id3-minimized'
-
-    },
-    shim: {
-        'jquery.mousewheel': ['jquery'],
-        //'backbone': {
-        //    deps: ['jquery', 'underscore'],
-        //    exports: 'Backbone'
-        //},
-        //'underscore': {
-        //    exports: '_'
-        //},
-        id3: {
-            exports: 'ID3'
-        }
-
-    }
-});
-
 define(
     [
-        'components/AudioControl',
+        'backbone',
         'components/EventDispatcher',
 
         'components/ui/Volume/model',
@@ -42,7 +16,7 @@ define(
         'components/ui/Screen/view'
     ],
     function(
-        AudioControl,
+        Backbone,
         EventDispatcher,
 
         VolumeModel,
@@ -57,13 +31,18 @@ define(
         ScreenModel,
         ScreenView
     ) {
+
         var playPauseButton = new PlayPauseButtonView({model: new PlayPauseButtonModel()});
         var progress = new ProgressView({model: new ProgressModel()});
         var screen = new ScreenView({model: new ScreenModel()});
         var volumeControl = new VolumeView({model: new VolumeModel()});
 
-        $('*').on('dragover dragenter dragleave drop', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+        var UIControl = _.extend({}, Backbone.Events);
+
+        UIControl.listenTo(UIControl.playPauseButton, 'play', function () {
+            EventDispatcher.trigger('play');
+        });
+        UIControl.listenTo(UIControl.playPauseButton, 'pause', function () {
+            EventDispatcher.trigger('pause');
         });
     });

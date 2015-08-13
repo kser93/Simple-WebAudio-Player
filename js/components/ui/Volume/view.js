@@ -2,7 +2,8 @@ define(
     [
         'backbone',
         'components/ui/Volume/model',
-        'components/EventDispatcher'
+        'components/EventDispatcher',
+        'jquery.mousewheel'
     ],
     function(
         Backbone,
@@ -31,6 +32,14 @@ define(
 
                 this.$el.click(_.bind(function(e) {
                     this.model.set('volume', this.computeVolume(e));
+                }, this));
+
+                this.$el.mousewheel(_.bind(function(e, delta) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var volume = this.model.get('volume');
+                    var additionalVolume = 0.5 * Math.sign(e.deltaY);
+                    this.model.set('volume', volume + additionalVolume, {validate: true});
                 }, this));
 
                 this.render();
@@ -122,7 +131,7 @@ define(
                         '#C0C0C0'
                     );
                 }
-                this.$el.find('[class$=value]').text(volume+'%');
+                this.$el.find('[class$=value]').text(Math.round(volume)+'%');
             }
 
     });
